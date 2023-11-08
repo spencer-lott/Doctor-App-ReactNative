@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, ScrollView } from 'react-native'
 import React from 'react'
 import { useAuth } from '@clerk/clerk-expo';
 import Header from '../Components/Home/Header';
@@ -8,20 +8,19 @@ import Categories from '../Components/Home/Categories';
 import Hospitals from '../Components/Home/Hospitals';
 
 export default function Home() {    
-const { isLoaded,signOut } = useAuth();
+const { isLoaded, signOut } = useAuth();
 
   return (
-    <View style={{padding: 20, marginTop: 25}}>
+    <ScrollView style={{padding: 20, marginTop: 25}}>
       <Header />
 
       <SearchBar setSearchText={(value) => console.log(value)} />
 
       <Slider />
-      {/* <Button title='SignOut'
-        onPress={() => signOut()}>
-      </Button> */}
+
       <Categories />
+
       <Hospitals />
-    </View>
+    </ScrollView>
   )
 }
