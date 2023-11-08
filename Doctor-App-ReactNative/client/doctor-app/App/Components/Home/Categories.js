@@ -2,6 +2,7 @@ import { View, Text, Image, FlatList, Dimensions } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { getAllCategories } from '../../Services/GlobalAPI'
 import Colors from '../../../assets/Shared/Colors'
+import SubHeading from './SubHeading'
 
 export default function Categories() {
     const [categories, setCategories] = useState([])
@@ -20,7 +21,8 @@ export default function Categories() {
 
   return (
     <View style={{marginTop: 10}}> 
-        <View style={{
+    <SubHeading subHeadingTitle={'Doctor Specialty'}/>
+        {/* <View style={{
             display: 'flex', 
             flexDirection: 'row', 
             justifyContent: 'space-between', 
@@ -33,7 +35,7 @@ export default function Categories() {
                 fontFamily: 'appfont',
                 color: Colors.PRIMARY
             }}>See All</Text>
-        </View>
+        </View> */}
 
         <FlatList
             data={categories}
