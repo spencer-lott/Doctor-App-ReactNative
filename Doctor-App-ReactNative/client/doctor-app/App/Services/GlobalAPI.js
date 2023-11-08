@@ -7,3 +7,7 @@ export const getAllSliders = () => {
 export const getAllCategories = () => {
     return fetch(`${BASE_URL}/Category`).then((res) => res.json())
 };
+
+export const getAllHospitals = () => {
+    return fetch(`${BASE_URL}/Hospital`).then((res) => res.json())
+};
