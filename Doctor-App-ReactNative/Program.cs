@@ -14,6 +14,7 @@ namespace Doctor_App_ReactNative
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddTransient<ISliderRepo, SliderRepo>();
             builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
+            builder.Services.AddTransient<IHospitalRepo, HospitalRepo>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
