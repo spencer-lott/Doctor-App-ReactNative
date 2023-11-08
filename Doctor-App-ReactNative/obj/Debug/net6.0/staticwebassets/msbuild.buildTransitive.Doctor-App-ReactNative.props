@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Doctor-App-ReactNative.props" />
+</Project>
