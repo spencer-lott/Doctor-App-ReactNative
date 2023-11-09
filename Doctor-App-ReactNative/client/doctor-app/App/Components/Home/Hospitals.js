@@ -19,7 +19,6 @@ export default function Hospitals() {
         return null
     }
 
-
   return hospitals&&(
     <View style={{marginTop: 10}}>
       <SubHeading subHeadingTitle={'Hospitals'}/>
@@ -30,9 +29,6 @@ export default function Hospitals() {
         renderItem={({item, index}) => (
             <HospitalItem hospital={item}/>
         )}
-      
-      
-      
       />
     </View>
   )

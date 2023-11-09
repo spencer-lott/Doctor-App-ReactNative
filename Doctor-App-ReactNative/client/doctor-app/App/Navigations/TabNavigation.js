@@ -5,6 +5,7 @@ import Home from '../Screens/Home'
 import Appointment from '../Screens/Appointment'
 import Profile from '../Screens/Profile'
 import { Ionicons, FontAwesome  } from '@expo/vector-icons';
+import HomeNavigation from './HomeNavigation'
 
 const Tab = createBottomTabNavigator()
 export default function TabNavigation() {
@@ -12,7 +13,7 @@ export default function TabNavigation() {
     <Tab.Navigator screenOptions={{
       headerShown: false
     }}>
-        <Tab.Screen name='Home' component={Home}
+        <Tab.Screen name='Home' component={HomeNavigation}
           options={{
             tabBarIcon:({color, size}) => (
               <Ionicons name="ios-home" size={size} color={color} />

@@ -9,7 +9,6 @@ export default function Slider() {
         getAllSliders().then((allSliders) => setSliders(allSliders))
       }
     
-      //This is what is displaying all the sliders on the page
       useEffect(() => {
         getSliders()
       }, [])
@@ -31,14 +30,6 @@ export default function Slider() {
                     />
                     )}
         />
-        {/* This code below is not necessary
-      <View>
-        <Text>
-          {sliders.map((slider) => (
-            <Text key={slider.id}>{slider.id} {slider.name} {slider.imageUrl}</Text>
-          ))}
-        </Text>
-      </View> */}
     </View>
   )
 }
