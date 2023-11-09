@@ -1,10 +1,12 @@
-import { View, Text, Image, FlatList, Dimensions } from 'react-native'
+import { View, Text, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { getAllCategories } from '../../Services/GlobalAPI'
 import Colors from '../../../assets/Shared/Colors'
 import SubHeading from './SubHeading'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Categories() {
+    const navigation = useNavigation()
     const [categories, setCategories] = useState([])
 
     const getCategories = () => {
@@ -22,21 +24,6 @@ export default function Categories() {
   return (
     <View style={{marginTop: 10}}> 
     <SubHeading subHeadingTitle={'Doctor Specialty'}/>
-        {/* <View style={{
-            display: 'flex', 
-            flexDirection: 'row', 
-            justifyContent: 'space-between', 
-            alignItems: 'center'}}>
-            <Text style={{
-                fontSize: 20,
-                fontFamily: 'appfont-semi'
-            }}>Doctor Specialty</Text>
-            <Text style={{
-                fontFamily: 'appfont',
-                color: Colors.PRIMARY
-            }}>See All</Text>
-        </View> */}
-
         <FlatList
             data={categories}
             numColumns={4}
@@ -46,7 +33,12 @@ export default function Categories() {
                 justifyContent: 'space-between'
             }}
             renderItem={({item, index}) => index < 4 &&(
-                <View style={{alignItems: 'center', marginBottom: 10}}> 
+                <TouchableOpacity 
+                onPress={() => navigation.navigate('hospital-doctor-list-screen', 
+                {
+                    categoryName: item.name
+                })}
+                style={{alignItems: 'center', marginBottom: 10}}> 
                     <View style={{
                         backgroundColor: Colors.SECONDARY,
                         padding: 15,
@@ -61,10 +53,9 @@ export default function Categories() {
                             />
                         </View>
                         <Text>{item.name}</Text>
-                    </View>
+                    </TouchableOpacity>
                     )}
         />
 </View>
-    
   )
 }
