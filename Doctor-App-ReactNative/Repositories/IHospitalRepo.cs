@@ -5,5 +5,10 @@ namespace Doctor_App_ReactNative.Repositories
     public interface IHospitalRepo
     {
         List<Hospital> GetAll();
+
+        List<Hospital> GetHospitalsByCategoryId(int categoryId);
+
+        List<Hospital> GetHospitalsByCategoryName(string name);
+
     }
 }

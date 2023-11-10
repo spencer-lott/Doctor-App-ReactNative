@@ -21,5 +21,34 @@ namespace Doctor_App_ReactNative.Controllers
             return Ok(_hospitalRepo.GetAll());
         }
 
+        [HttpGet("GetHospitalsByCategoryId")]
+        public IActionResult GetHospitalsByCategoryId(int categoryId)
+        {
+            var category = _hospitalRepo.GetHospitalsByCategoryId(categoryId);
+        //.ToList();
+
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
+        [HttpGet("GetHospitalsByCategoryName")]
+        public IActionResult GetHospitalsByCategoryName(string categoryName)
+        {
+            var category = _hospitalRepo.GetHospitalsByCategoryName(categoryName);
+        //.ToList();
+
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
+
     }
 }
