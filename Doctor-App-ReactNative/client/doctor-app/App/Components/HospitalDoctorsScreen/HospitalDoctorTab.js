@@ -52,3 +52,5 @@ const styles = StyleSheet.create({
         padding: 3
     }
 })
+
+//ADDING THIS COMMENT SO I CAN TEST THE GITIGNORE CHANGES
