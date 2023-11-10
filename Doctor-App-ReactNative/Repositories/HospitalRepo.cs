@@ -16,7 +16,7 @@ namespace Doctor_App_ReactNative.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, Name, Address, ImageUrl, Website, Phone
+                        SELECT Id, [Name], Address, ImageUrl, Website, Phone
                         FROM Hospital";
 
                     var reader = cmd.ExecuteReader();
@@ -42,6 +42,129 @@ namespace Doctor_App_ReactNative.Repositories
                 }
             }
         }
+
+        public List<Hospital> GetHospitalsByCategoryId(int categoryId)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT 
+                            h.Id AS HId, 
+                            h.[Name] AS HospitalName, 
+                            h.Address, 
+                            h.ImageUrl, 
+                            h.Website, 
+                            h.Phone,
+                            c.Id AS CategoryId,
+                            c.[Name] AS CategoryName,
+                            hc.HospitalId
+                        FROM 
+                            Hospital h
+                        LEFT JOIN 
+                            Hospital_Category hc ON h.Id = hc.HospitalId
+                        LEFT JOIN 
+                            Category c ON hc.CategoryId = c.Id
+                        WHERE 
+                            c.Id = @categoryId;
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@categoryId", categoryId);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var hospitals = new List<Hospital>();
+                    while (reader.Read())
+                    {
+                        hospitals.Add(new Hospital()
+                        {
+                            Id = DbUtils.GetInt(reader, "HId"),
+                            Name = DbUtils.GetString(reader, "HospitalName"),
+                            Address = DbUtils.GetString(reader, "Address"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Website = DbUtils.GetString(reader, "Website"),
+                            Phone = DbUtils.GetString(reader, "Phone"),
+                        });
+                    }
+
+                    reader.Close();
+
+                    return hospitals;
+                }
+            }
+        }
+
+        public List<Hospital> GetHospitalsByCategoryName(string name)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT 
+                            h.Id AS HId, 
+                            h.[Name] AS HospitalName, 
+                            h.Address, 
+                            h.ImageUrl, 
+                            h.Website, 
+                            h.Phone,
+                            c.Id AS CId,
+                            c.[Name] AS CategoryName,
+                            c.IconUrl,
+                            hc.Id AS HCId,
+                            hc.HospitalId,
+                            hc.CategoryId
+                        FROM 
+                            Hospital h
+                        LEFT JOIN 
+                            Hospital_Category hc ON h.Id = hc.HospitalId
+                        LEFT JOIN 
+                            Category c ON hc.CategoryId = c.Id
+                        WHERE 
+                            c.[Name] = @categoryName;
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@categoryName", name);
+
+                    var reader = cmd.ExecuteReader();
+
+                    var hospitals = new List<Hospital>();
+                    while (reader.Read())
+                    {
+                        hospitals.Add(new Hospital()
+                        {
+                            Id = DbUtils.GetInt(reader, "HId"),
+                            Name = DbUtils.GetString(reader, "HospitalName"),
+                            Address = DbUtils.GetString(reader, "Address"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
+                            Website = DbUtils.GetString(reader, "Website"),
+                            Phone = DbUtils.GetString(reader, "Phone"),
+                            Hospital_Category = new Hospital_Category()
+                            {
+                                Id = DbUtils.GetInt(reader, "HCId"),
+                                HospitalId = DbUtils.GetInt(reader, "HospitalId"),
+                                CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            },
+                            Category = new Category() 
+                            {
+                                Id = DbUtils.GetInt(reader, "CId"),
+                                Name = DbUtils.GetString(reader, "CategoryName"),
+                                IconUrl = DbUtils.GetString(reader, "IconUrl")
+                            }
+                        });
+                    }
+
+                    reader.Close();
+
+                    return hospitals;
+                }
+            }
+        }
+
+
 
     }
 }

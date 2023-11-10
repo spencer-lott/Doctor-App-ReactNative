@@ -13,5 +13,9 @@
         public string Website { get; set; }
 
         public string Phone { get; set; }
+
+        public Hospital_Category? Hospital_Category { get; set; }
+
+        public Category? Category { get; set; }
     }
 }
