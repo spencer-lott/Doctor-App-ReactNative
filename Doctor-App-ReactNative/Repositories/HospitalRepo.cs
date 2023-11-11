@@ -21,10 +21,10 @@ namespace Doctor_App_ReactNative.Repositories
 
                     var reader = cmd.ExecuteReader();
 
-                    var categories = new List<Hospital>();
+                    var hospitals = new List<Hospital>();
                     while (reader.Read())
                     {
-                        categories.Add(new Hospital()
+                        hospitals.Add(new Hospital()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             Name = DbUtils.GetString(reader, "Name"),
@@ -38,7 +38,7 @@ namespace Doctor_App_ReactNative.Repositories
 
                     reader.Close();
 
-                    return categories;
+                    return hospitals;
                 }
             }
         }
