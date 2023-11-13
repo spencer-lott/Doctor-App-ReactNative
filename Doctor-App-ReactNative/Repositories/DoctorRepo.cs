@@ -15,7 +15,7 @@ namespace Doctor_App_ReactNative.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], Years_Of_Experience, StartTime, EndTime, About, HospitalId, CategoryId
+                        SELECT Id, [Name], Years_Of_Experience, StartTime, EndTime, About, HospitalId, CategoryId, ImageUrl
                         FROM Doctor
                         ";
 
@@ -33,7 +33,8 @@ namespace Doctor_App_ReactNative.Repositories
                             EndTime = DbUtils.GetString(reader, "EndTime"),
                             About = DbUtils.GetString(reader, "About"),
                             HospitalId = DbUtils.GetInt(reader, "HospitalId"),
-                            CategoryId = DbUtils.GetInt(reader, "CategoryId")
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl")
 
                         });
                     }
@@ -62,6 +63,7 @@ namespace Doctor_App_ReactNative.Repositories
                             d.About,
                             d.HospitalId,
                             d.CategoryId,
+                            d.ImageUrl,
                             c.Id AS CId,
                             c.[Name] AS CategoryName,
                             c.IconUrl
@@ -90,6 +92,7 @@ namespace Doctor_App_ReactNative.Repositories
                             About = DbUtils.GetString(reader, "About"),
                             HospitalId = DbUtils.GetInt(reader, "HospitalId"),
                             CategoryId = DbUtils.GetInt(reader, "CategoryId"),
+                            ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Category = new Category()
                             {
                                 Id = DbUtils.GetInt(reader, "CId"),
