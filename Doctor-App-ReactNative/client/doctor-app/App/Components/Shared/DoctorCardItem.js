@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useEffect, useState } from 'react'
 import Colors from '../../../assets/Shared/Colors'
 
 export default function DoctorCardItem({ doctor }) {

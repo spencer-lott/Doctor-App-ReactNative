@@ -16,7 +16,7 @@ namespace Doctor_App_ReactNative.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name], Address, ImageUrl, Website, Phone
+                        SELECT Id, [Name], Address, ImageUrl, Website, Phone, Description
                         FROM Hospital";
 
                     var reader = cmd.ExecuteReader();
@@ -31,7 +31,8 @@ namespace Doctor_App_ReactNative.Repositories
                             Address = DbUtils.GetString(reader, "Address"),
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Website = DbUtils.GetString(reader, "Website"),
-                            Phone = DbUtils.GetString(reader, "Phone")
+                            Phone = DbUtils.GetString(reader, "Phone"),
+                            Description = DbUtils.GetString(reader, "Description")
 
                         });
                     }
@@ -58,6 +59,7 @@ namespace Doctor_App_ReactNative.Repositories
                             h.ImageUrl, 
                             h.Website, 
                             h.Phone,
+                            h.Description,
                             c.Id AS CategoryId,
                             c.[Name] AS CategoryName,
                             hc.HospitalId
@@ -86,6 +88,7 @@ namespace Doctor_App_ReactNative.Repositories
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Website = DbUtils.GetString(reader, "Website"),
                             Phone = DbUtils.GetString(reader, "Phone"),
+                            Description = DbUtils.GetString(reader, "Description")
                         });
                     }
 
@@ -111,6 +114,7 @@ namespace Doctor_App_ReactNative.Repositories
                             h.ImageUrl, 
                             h.Website, 
                             h.Phone,
+                            h.Description,
                             c.Id AS CId,
                             c.[Name] AS CategoryName,
                             c.IconUrl,
@@ -142,6 +146,7 @@ namespace Doctor_App_ReactNative.Repositories
                             ImageUrl = DbUtils.GetString(reader, "ImageUrl"),
                             Website = DbUtils.GetString(reader, "Website"),
                             Phone = DbUtils.GetString(reader, "Phone"),
+                            Description = DbUtils.GetString(reader, "Description"),
                             Hospital_Category = new Hospital_Category()
                             {
                                 Id = DbUtils.GetInt(reader, "HCId"),

@@ -8,9 +8,21 @@ export const getAllCategories = () => {
     return fetch(`${BASE_URL}/Category`).then((res) => res.json())
 };
 
-export const getAllHospitals = () => {
-    return fetch(`${BASE_URL}/Hospital`).then((res) => res.json())
+// export const getAllHospitals = () => {
+//     return fetch(`${BASE_URL}/Hospital`).then((res) => res.json())
+// };
+export const getAllHospitals = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/Hospital`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        // Handle errors here
+        console.error('Error fetching hospitals:', error);
+        throw error; // Re-throw the error to propagate it to the caller
+    }
 };
+
 
 export const getAllDoctors = () => {
     return fetch(`${BASE_URL}/Doctor`).then((res) => res.json())
