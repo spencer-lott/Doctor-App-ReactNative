@@ -14,6 +14,8 @@
 
         public string Phone { get; set; }
 
+        public string Description { get; set; }
+
         public Hospital_Category? Hospital_Category { get; set; }
 
         public Category? Category { get; set; }
