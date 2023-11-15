@@ -1,6 +1,6 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import PageHeader from '../Components/Shared/PageHeader'
 import HospitalInfo from '../Components/HospitalDetail/HospitalInfo';
 import Colors from '../../assets/Shared/Colors';
@@ -8,9 +8,11 @@ import Colors from '../../assets/Shared/Colors';
 export default function HospitalDetails() {
     const [hospital, setHospital] = useState();
     const param = useRoute().params;
+    const navigation = useNavigation()
 
     useEffect(() => {
         setHospital(param.singleHospital)
+        console.log(hospital)
     }, [])
 
   return (
@@ -30,7 +32,10 @@ export default function HospitalDetails() {
         </View>
       </ScrollView>
 
-      <TouchableOpacity style={{
+      <TouchableOpacity onPress={() => navigation.navigate('book-appointment', {
+        hospital: hospital
+      })}
+      style={{
         padding: 13,
         backgroundColor: Colors.PRIMARY,
         margin: 10,

@@ -2,7 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import Colors from '../../../assets/Shared/Colors'
 
-export default function SubHeading({subHeadingTitle}) {
+export default function SubHeading({subHeadingTitle, seeAll = true}) {
   return (
     <View style={{marginTop: 10}}> 
         <View style={{
@@ -14,10 +14,10 @@ export default function SubHeading({subHeadingTitle}) {
                 fontSize: 20,
                 fontFamily: 'appfont-semi'
             }}>{subHeadingTitle}</Text>
-            <Text style={{
+            {seeAll ? <Text style={{
                 fontFamily: 'appfont',
                 color: Colors.PRIMARY
-            }}>See All</Text>
+            }}>See All</Text> : null}
         </View>
     </View>
   )
