@@ -8,9 +8,6 @@ export const getAllCategories = () => {
     return fetch(`${BASE_URL}/Category`).then((res) => res.json())
 };
 
-// export const getAllHospitals = () => {
-//     return fetch(`${BASE_URL}/Hospital`).then((res) => res.json())
-// };
 export const getAllHospitals = async () => {
     try {
         const response = await fetch(`${BASE_URL}/Hospital`);
@@ -22,7 +19,6 @@ export const getAllHospitals = async () => {
         throw error; // Re-throw the error to propagate it to the caller
     }
 };
-
 
 export const getAllDoctors = () => {
     return fetch(`${BASE_URL}/Doctor`).then((res) => res.json())
@@ -38,4 +34,14 @@ export const getHospitalsByCategoryName = (name) => {
 
 export const getDoctorsByCategoryName = (name) => {
     return fetch(`${BASE_URL}/Doctor/GetDoctorsByCategoryName?categoryName=${name}`).then((res) => res.json())  
+}
+
+export const addAppointment = (singleAppointment) => {
+    return fetch(`${BASE_URL}/Appointment`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(singleAppointment)
+    });
 }

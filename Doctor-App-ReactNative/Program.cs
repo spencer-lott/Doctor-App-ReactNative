@@ -16,6 +16,7 @@ namespace Doctor_App_ReactNative
             builder.Services.AddTransient<ICategoryRepo, CategoryRepo>();
             builder.Services.AddTransient<IHospitalRepo, HospitalRepo>();
             builder.Services.AddTransient<IDoctorRepo, DoctorRepo>();
+            builder.Services.AddTransient<IAppointmentRepo, AppointmentRepo>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
