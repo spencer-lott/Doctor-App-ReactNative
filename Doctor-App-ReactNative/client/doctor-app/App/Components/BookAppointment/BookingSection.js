@@ -3,13 +3,21 @@ import React, {useState, useEffect} from 'react'
 import Colors from '../../../assets/Shared/Colors'
 import SubHeading from '../Home/SubHeading'
 import moment from 'moment'
+import { addAppointment } from '../../Services/GlobalAPI'
+import { useUser } from '@clerk/clerk-expo'
+import { useNavigation } from '@react-navigation/native';
 
-export default function BookingSection() {
+
+export default function BookingSection({ hospital }) {
+    const navigation = useNavigation()
+    const {isLoaded, isSignedIn, user} = useUser()
+
     const [next7Days, setNext7Days] = useState([])
     const [timeList, setTimeList] = useState([])
     
     const [selectedDate, setSelectedDate] = useState()
     const [selectedTime, setSelectedTime] = useState()
+    const [notes, setNotes] = useState()
 
     useEffect(() => {
         getDays()
@@ -59,6 +67,23 @@ export default function BookingSection() {
         setTimeList(timeList)
 
     }
+
+    const handleSaveButtonClick = () => {
+
+        const appointmentToSendToAPI = {
+            UserName: user.fullName,
+            Email: user.primaryEmailAddress.emailAddress,
+            Date: selectedDate,
+            Time: selectedTime,
+            Note: notes,
+            HospitalId: hospital.id
+
+        }
+
+        return addAppointment(appointmentToSendToAPI).then(navigation.goBack())
+
+    }
+
   return (
     <View>
       <Text style={{
@@ -101,11 +126,12 @@ export default function BookingSection() {
 
       <TextInput 
         numberOfLines={3}
+        onChangeText={(value) => setNotes(value)}
         style={{backgroundColor: Colors.LIGHT_GRAY, padding: 10, paddingBottom: 40, borderRadius: 10, borderColor: Colors.SECONDARY, borderWidth: 1, textAlignVertical: 'top'}}
         placeholder='Write Notes Here'
       />
 
-      <TouchableOpacity onPress={() => console.log('Press')}
+      <TouchableOpacity onPress={() => handleSaveButtonClick()}
         style={{
             padding: 13,
             backgroundColor: Colors.PRIMARY,
