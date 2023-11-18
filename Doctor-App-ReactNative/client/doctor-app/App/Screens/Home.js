@@ -14,7 +14,7 @@ const { isLoaded, signOut } = useAuth();
     <ScrollView style={{padding: 20, marginTop: 25}}>
       <Header />
 
-      <SearchBar setSearchText={(value) => console.log(value)} />
+      {/* <SearchBar setSearchText={(value) => console.log(value)} /> */}
 
       <Slider />
 
