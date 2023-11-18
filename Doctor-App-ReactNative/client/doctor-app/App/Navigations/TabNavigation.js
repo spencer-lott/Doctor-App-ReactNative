@@ -6,6 +6,7 @@ import Appointment from '../Screens/Appointment'
 import Profile from '../Screens/Profile'
 import { Ionicons, FontAwesome  } from '@expo/vector-icons';
 import HomeNavigation from './HomeNavigation'
+import Explores from '../Screens/Explores'
 
 const Tab = createBottomTabNavigator()
 export default function TabNavigation() {
@@ -18,6 +19,11 @@ export default function TabNavigation() {
             tabBarIcon:({color, size}) => (
               <Ionicons name="ios-home" size={size} color={color} />
             )
+          }}/>
+        <Tab.Screen name='Explore' component={Explores}
+          options={{
+            tabBarIcon:({color, size}) => (
+              <Ionicons name="search" size={size} color={color} />            )
           }}/>
         <Tab.Screen name='Appointment' component={Appointment}
           options={{

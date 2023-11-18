@@ -1,11 +1,13 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import SubHeading from './SubHeading'
 import { getAllHospitals } from '../../Services/GlobalAPI'
+import { useNavigation } from '@react-navigation/native'
+import SubHeading from './SubHeading'
 import HospitalItem from './HospitalItem'
 
 export default function Hospitals() {
     const [hospitals, setHospitals] = useState([])
+    const navigation = useNavigation()
 
     const getHospitals = () => {
         getAllHospitals().then((allHospitals) => setHospitals(allHospitals))
@@ -13,23 +15,24 @@ export default function Hospitals() {
 
     useEffect(() => {
         getHospitals()
+
     })
 
     if (!hospitals){
         return null
     }
 
-  return hospitals&&(
-    <View style={{marginTop: 10}}>
-      <SubHeading subHeadingTitle={'Hospitals'}/>
-      <FlatList 
-        data={hospitals}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({item, index}) => (
-            <HospitalItem hospital={item}/>
-        )}
-      />
-    </View>
-  )
-}
+    return (
+      <View style={{marginTop: 10}}>
+          <SubHeading subHeadingTitle={'Hospitals'}/>
+          <FlatList 
+              data={hospitals}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item, index}) => (
+                  <HospitalItem hospital={item}/>
+              )}
+          />
+      </View>
+  )}
+
