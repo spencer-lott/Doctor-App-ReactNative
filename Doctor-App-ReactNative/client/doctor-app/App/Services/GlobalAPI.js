@@ -45,3 +45,9 @@ export const addAppointment = (singleAppointment) => {
         body: JSON.stringify(singleAppointment)
     });
 }
+
+export const getAppointmentsByEmail = (email) => {
+    return fetch(`${BASE_URL}/Appointment/GetAppointmentsByEmail?email=${email}`).then((res) => res.json())  
+}
+
+// http://192.168.1.235:5236/api/Appointment/GetAppointmentsByEmail?email=spklott%40gmail.com

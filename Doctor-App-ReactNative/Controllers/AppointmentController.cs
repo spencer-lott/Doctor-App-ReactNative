@@ -22,6 +22,19 @@ namespace Doctor_App_ReactNative.Controllers
             return Ok(_appointmentRepo.GetAll());
         }
 
+        [HttpGet("GetAppointmentsByEmail")]
+        public IActionResult GetAppointmentsByEmail(string email)
+        {
+            var category = _appointmentRepo.GetAppointmentsByEmail(email);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return Ok(category);
+        }
+
+
         [HttpPost]
         public IActionResult Post(Appointment appointment)
         {

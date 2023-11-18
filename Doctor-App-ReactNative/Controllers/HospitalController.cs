@@ -25,8 +25,6 @@ namespace Doctor_App_ReactNative.Controllers
         public IActionResult GetHospitalsByCategoryId(int categoryId)
         {
             var category = _hospitalRepo.GetHospitalsByCategoryId(categoryId);
-        //.ToList();
-
 
             if (category == null)
             {
@@ -39,8 +37,6 @@ namespace Doctor_App_ReactNative.Controllers
         public IActionResult GetHospitalsByCategoryName(string categoryName)
         {
             var category = _hospitalRepo.GetHospitalsByCategoryName(categoryName);
-        //.ToList();
-
 
             if (category == null)
             {

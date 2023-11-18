@@ -16,6 +16,8 @@
 
         public int HospitalId { get; set; }
 
+        public Hospital? Hospital { get; set; }
+
 
     }
 }
