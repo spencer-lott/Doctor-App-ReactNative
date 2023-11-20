@@ -11,7 +11,6 @@ export default function HospitalCardItem({hospital}) {
       style={{
         width: '100%',
         height: 140,
-        borderTop: 10,
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10
       }} />

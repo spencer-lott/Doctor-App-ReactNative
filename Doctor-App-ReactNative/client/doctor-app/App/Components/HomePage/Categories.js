@@ -23,22 +23,19 @@ export default function Categories() {
 
   return (
     <View style={{marginTop: 10}}> 
-    <SubHeading subHeadingTitle={'Doctor Specialty'}/>
+    <SubHeading subHeadingTitle={'Doctor Specialty'} seeAll={false}/>
         <FlatList
             data={categories}
-            numColumns={4}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
             style={{marginTop: 5}}
-            columnWrapperStyle={{
-                flex: 1,
-                justifyContent: 'space-between'
-            }}
-            renderItem={({item, index}) => index < 4 &&(
+            renderItem={({item, index}) => (
                 <TouchableOpacity 
                 onPress={() => navigation.navigate('hospital-doctor-list-screen', 
                 {
                     categoryName: item.name
                 })}
-                style={{alignItems: 'center', marginBottom: 10}}> 
+                style={{alignItems: 'center', marginBottom: 10, marginRight: 7}}> 
                     <View style={{
                         backgroundColor: Colors.SECONDARY,
                         padding: 15,

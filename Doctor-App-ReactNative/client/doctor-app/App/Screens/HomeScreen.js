@@ -1,13 +1,13 @@
 import { View, Text, Button, ScrollView } from 'react-native'
 import React from 'react'
 import { useAuth } from '@clerk/clerk-expo';
-import Header from '../Components/Home/Header';
-import SearchBar from '../Components/Home/SearchBar';
-import Slider from '../Components/Home/Slider';
-import Categories from '../Components/Home/Categories';
-import Hospitals from '../Components/Home/Hospitals';
+import Header from '../Components/HomePage/Header';
+import SearchBar from '../Components/HomePage/SearchBar';
+import Slider from '../Components/HomePage/Slider';
+import Categories from '../Components/HomePage/Categories';
+import Hospitals from '../Components/HomePage/Hospitals';
 
-export default function Home() {    
+export default function HomeScreen() {    
 const { isLoaded, signOut } = useAuth();
 
   return (

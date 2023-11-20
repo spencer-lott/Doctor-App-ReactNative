@@ -3,7 +3,7 @@ import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../../assets/Shared/Colors';
 import ActionButton from './ActionButton';
-import SubHeading from '../Home/SubHeading';
+import SubHeading from '../HomePage/SubHeading';
 import HorizontalLine from '../Shared/HorizontalLine';
 
 export default function HospitalInfo({ hDetail }) {
