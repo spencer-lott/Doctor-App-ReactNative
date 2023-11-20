@@ -1,12 +1,40 @@
-import { View, Text, FlatList, Image } from 'react-native'
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Colors from '../../../assets/Shared/Colors'
 import HorizontalLine from '../Shared/HorizontalLine'
 import { Ionicons } from '@expo/vector-icons';
 import moment from 'moment';
+import { deleteAppointment, getAllAppointments, getAppointmentsByEmail } from '../../Services/GlobalAPI';
+import { useUser } from '@clerk/clerk-expo'
 
 
-export default function AppointmentCardItem({ appointment }) {
+export default function AppointmentCardItem({ appointment, setUserAppointments }) {
+    const {isLoaded, isSignedIn, user} = useUser()
+
+    // const handleDelete = () => {
+    //     deleteAppointment(appointment.id)
+    //     .then(data => setUserAppointments(data)).then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress))
+
+    // }
+
+    const handleDelete = () => {
+        deleteAppointment(appointment.id)
+            .then(() => {
+                // Retrieve updated appointments after deletion
+                getAppointmentsByEmail(user.primaryEmailAddress.emailAddress)
+                    .then(data => setUserAppointments(data))
+                    .catch(error => {
+                        // Handle error if needed
+                        console.error("Error fetching appointments:", error);
+                    });
+            })
+            .catch(error => {
+                // Handle error if needed
+                console.error("Error deleting appointment:", error);
+            });
+    };
+    
+    
   return (
     <View style={{
         padding: 10,
@@ -30,6 +58,12 @@ export default function AppointmentCardItem({ appointment }) {
                 <View style={{display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center', marginTop: 5}}>
                     <Ionicons name="document-text" size={18} color={Colors.PRIMARY} />
                     <Text style={{fontFamily: 'appfont', color: Colors.GRAY}}>Booking Id: #{appointment.id}</Text>
+                </View>
+
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                <TouchableOpacity onPress={handleDelete} style={{backgroundColor: 'red', borderRadius: 10, padding: 5}}>
+                    <Text style={{color: Colors.white}}>Delete</Text>
+                </TouchableOpacity>
                 </View>
 
 

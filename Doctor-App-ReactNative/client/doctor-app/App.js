@@ -39,7 +39,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Login from './App/Screens/Login';
 import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
 import SignInWithOAuth from './App/Components/SignInWithOAuth';
-import Home from './App/Screens/Home';
+import Home from './App/Screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './App/Navigations/TabNavigation';
 import { useFonts } from 'expo-font';

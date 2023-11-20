@@ -1,9 +1,9 @@
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import Colors from '../../../assets/Shared/Colors'
-import SubHeading from '../Home/SubHeading'
+import SubHeading from '../HomePage/SubHeading'
 import moment from 'moment'
-import { addAppointment } from '../../Services/GlobalAPI'
+import { addAppointment, getAllAppointments, getAppointmentsByEmail } from '../../Services/GlobalAPI'
 import { useUser } from '@clerk/clerk-expo'
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,7 +23,6 @@ export default function BookingSection({ hospital }) {
         getDays()
         getTime()
     }, [])
-
 
     const getDays = () => {
         const today = moment()
@@ -67,7 +66,7 @@ export default function BookingSection({ hospital }) {
         setTimeList(timeList)
 
     }
-
+    
     const handleSaveButtonClick = () => {
 
         const appointmentToSendToAPI = {
@@ -80,7 +79,24 @@ export default function BookingSection({ hospital }) {
 
         }
 
-        return addAppointment(appointmentToSendToAPI).then(navigation.goBack())
+        return addAppointment(appointmentToSendToAPI)
+        .then(() => {
+            Alert.alert(
+                'Congratulations!',
+                'You have booked your appointment.',
+                [
+                    {
+                        text: 'OK',
+                    },
+                ],
+                { cancelable: false }
+            )
+            navigation.navigate('Home') 
+            
+            
+        })
+        .then(() => getAllAppointments())
+        .then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress))
 
     }
 
