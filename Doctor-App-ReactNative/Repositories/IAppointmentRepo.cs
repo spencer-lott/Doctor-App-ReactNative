@@ -6,6 +6,7 @@ namespace Doctor_App_ReactNative.Repositories
     {
         void Add(Appointment appointment);
         void Delete(int id);
+        void Update(Appointment appointment);
         List<Appointment> GetAll();
         List<Appointment> GetAppointmentsByEmail(string name);
 
