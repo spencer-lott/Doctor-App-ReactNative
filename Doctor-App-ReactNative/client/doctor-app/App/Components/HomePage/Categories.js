@@ -15,7 +15,7 @@ export default function Categories() {
 
     useEffect(() => {
         getCategories()
-    })
+    }, [])
 
     if (!categories){
         return null

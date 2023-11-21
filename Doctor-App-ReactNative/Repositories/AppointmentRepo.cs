@@ -96,7 +96,6 @@ namespace Doctor_App_ReactNative.Repositories
             }
         }
 
-
         public void Add(Appointment appointment)
         {
             using (var conn = Connection)
@@ -118,6 +117,38 @@ namespace Doctor_App_ReactNative.Repositories
                 }
             }
         }
+
+        public void Update(Appointment appointment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        UPDATE Appointment
+                           SET UserName = @UserName,
+                               Email = @Email,
+                               Date = @Date,
+                               Time = @Time,
+                               Note = @Note,
+                               HospitalId = @HospitalId
+
+                         WHERE Id = @Id";
+
+                    DbUtils.AddParameter(cmd, "@UserName", appointment.UserName);
+                    DbUtils.AddParameter(cmd, "@Email", appointment.Email);
+                    DbUtils.AddParameter(cmd, "@Date", appointment.Date);
+                    DbUtils.AddParameter(cmd, "@Time", appointment.Time);
+                    DbUtils.AddParameter(cmd, "@Note", appointment.Note);
+                    DbUtils.AddParameter(cmd, "@HospitalId", appointment.HospitalId);
+                    DbUtils.AddParameter(cmd, "@Id", appointment.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
 
         public void Delete(int id)
         {

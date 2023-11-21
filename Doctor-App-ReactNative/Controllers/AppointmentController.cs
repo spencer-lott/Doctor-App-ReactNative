@@ -42,6 +42,18 @@ namespace Doctor_App_ReactNative.Controllers
             return CreatedAtAction("Get", new { id = appointment.Id });
         }
 
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Appointment appointment)
+        {
+            if (id != appointment.Id)
+            {
+                return BadRequest();
+            }
+
+            _appointmentRepo.Update(appointment);
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
