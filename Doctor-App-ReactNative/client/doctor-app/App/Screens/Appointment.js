@@ -11,7 +11,6 @@ export default function Appointment() {
   const {isLoaded, isSignedIn, user} = useUser()
   const [userAppointments, setUserAppointments] = useState([])
 
-
   const getUserAppointments = () => {
     getAppointmentsByEmail(user.primaryEmailAddress.emailAddress).then((data) => setUserAppointments(data))
   }
@@ -30,13 +29,13 @@ export default function Appointment() {
       <PageHeader title={'My Appointments'} backButton={false} />
       <FlatList 
         data={userAppointments}
-        // extraData={praiseList}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
-          <AppointmentCardItem appointment={item} setUserAppointments={setUserAppointments}/>
+          <AppointmentCardItem appointment={item} setUserAppointments={setUserAppointments} />
         )}
       
       />    
       </View>
   )
 }
+
