@@ -31,7 +31,7 @@ export default function HospitalInfo({ hDetail }) {
         <View style={{ borderBottomWidth: 1, borderColor: Colors.LIGHT_GRAY, margin: 5, marginBottom: 15, marginTop: 15}}>
         </View>
 
-        <SubHeading subHeadingTitle={'About'} />
+        <SubHeading subHeadingTitle={'About'} seeAll={false}/>
         <Text>{hDetail.description}</Text>
     </View>
 

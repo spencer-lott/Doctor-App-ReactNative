@@ -61,7 +61,7 @@ useEffect(() => {
 
     return (
       <View style={{marginTop: 10}}>
-          <SubHeading subHeadingTitle={'Hospitals'}/>
+          <SubHeading subHeadingTitle={'Hospitals'} seeAll={false}/>
           <FlatList 
               data={hospitals}
               horizontal={true}

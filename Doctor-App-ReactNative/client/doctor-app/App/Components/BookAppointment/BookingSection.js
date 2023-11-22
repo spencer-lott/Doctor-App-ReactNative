@@ -109,7 +109,6 @@ export default function BookingSection({ hospital }) {
             
             
         })
-        // .then(() => getAllAppointments())
         .then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress))
     }
     }
