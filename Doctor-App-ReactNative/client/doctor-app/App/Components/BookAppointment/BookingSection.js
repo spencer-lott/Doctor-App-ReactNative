@@ -79,6 +79,20 @@ export default function BookingSection({ hospital }) {
 
         }
 
+        if(!selectedDate || !selectedTime || !notes){
+            Alert.alert(
+              'ERROR',
+              'Please fill all fields before submitting',
+              [
+                {
+                  text: 'OK',
+                },
+              ],
+              { cancelable: false }
+              )
+            } else {
+        
+
         return addAppointment(appointmentToSendToAPI)
         .then(() => {
             Alert.alert(
@@ -95,9 +109,9 @@ export default function BookingSection({ hospital }) {
             
             
         })
-        .then(() => getAllAppointments())
+        // .then(() => getAllAppointments())
         .then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress))
-
+    }
     }
 
   return (

@@ -53,17 +53,17 @@ export const deleteAppointment = (id) => {
     })
   };
 
-// export const editAppointment = (appointment) => {
-//     return fetch(`${BASE_URL}/Appointment/${appointment.Id}`, {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(appointment)
-//     })
-//     .then(() => getAllAppointments())
-//     .catch(error => {
-//       console.error("Error adding appointment:", error);
-//     });
+export const editAppointment = (appointment) => {
+    return fetch(`${BASE_URL}/Appointment/${appointment.Id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(appointment)
+    })
+    .then(() => getAllAppointments())
+    .catch(error => {
+      console.error("Error adding appointment:", error);
+    });
 
-// }
+}

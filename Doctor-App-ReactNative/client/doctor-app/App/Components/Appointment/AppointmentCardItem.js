@@ -1,15 +1,17 @@
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import moment from 'moment';
 import { deleteAppointment, getAppointmentsByEmail } from '../../Services/GlobalAPI';
 import Colors from '../../../assets/Shared/Colors'
 import HorizontalLine from '../Shared/HorizontalLine'
 import { useUser } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function AppointmentCardItem({ appointment, setUserAppointments }) {
     const {isLoaded, isSignedIn, user} = useUser()
+    const navigation = useNavigation();
 
     const handleDelete = () => {
             Alert.alert('Delete', 'Are you sure you want to delete this item?', [
@@ -67,6 +69,13 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
     const noteChunks = splitNote(appointment.note);
     const addressNoteChunks = splitNote(appointment?.hospital?.address)
 
+    const handleEdit = () => {
+        navigation.navigate('edit-appointment', {
+          appointment: appointment
+        });
+      };
+    
+
   return (
     <View style={{
         padding: 10,
@@ -75,6 +84,7 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
         borderRadius: 10,
         backgroundColor: Colors.white, marginTop: 15 
         }}>
+
         <Text style={{fontSize: 16, fontFamily: 'appfont-semi', marginTop: 10}}>{moment(appointment.date).format('MMMM Do YYYY')} - {appointment.time}</Text>
         <HorizontalLine />
         <View style={{display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'center'}}>
@@ -113,7 +123,7 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
                     </View>
                     <View>
 
-                    <TouchableOpacity onPress={() => console.log('***EDIT ME***')} style={{borderRadius: 10, marginLeft: 30, marginRight: 15}}>
+                    <TouchableOpacity onPress={handleEdit} style={{borderRadius: 10, marginLeft: 30, marginRight: 15}}>
                         <Text style={{color: Colors.white}}><Ionicons name="pencil" size={24} color={Colors.PRIMARY} /></Text>
                     </TouchableOpacity>
                     </View>
@@ -133,3 +143,4 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
     </View>
   )
 }
+
