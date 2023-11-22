@@ -1,4 +1,4 @@
-import { View, Text, Button, Image } from 'react-native'
+import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
 import { useAuth, useUser } from '@clerk/clerk-expo'
 import Colors from '../../assets/Shared/Colors'
@@ -23,11 +23,13 @@ export default function Profile() {
             style={{width: 200, height: 200, borderRadius: 99}}
             />
       </View>
-      <View style={{backgroundColor: Colors.PRIMARY, borderRadius: 20, paddingHorizontal: 100, margin: 10}}>
-        <Button title='Sign Out' 
-        onPress={() => signOut()}
-        color={Colors.white}      
-        ></Button>
+      
+      <View >
+        <TouchableOpacity onPress={() => signOut()}
+        style={{backgroundColor: Colors.PRIMARY, borderRadius: 90, alignItems: 'center', margin: 10,     width: Dimensions.get('screen').width*0.8
+      }}>
+          <Text style={{fontSize: 17 ,color: Colors.white, paddingVertical: 16}}>Sign Out</Text>
+        </TouchableOpacity>
       </View>
         </View>
 

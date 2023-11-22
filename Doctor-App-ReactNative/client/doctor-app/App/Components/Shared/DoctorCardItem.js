@@ -34,11 +34,11 @@ export default function DoctorCardItem({ doctor }) {
         </View>
 
 
-        <View>
+        {/* <View>
           <TouchableOpacity style={{display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.SECONDARY, borderRadius: 10, marginTop: 10, padding: 10}}>
             <Text style={{color: Colors.PRIMARY, fontFamily: 'appfont'}}>Make Appointment</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     </View>
   )

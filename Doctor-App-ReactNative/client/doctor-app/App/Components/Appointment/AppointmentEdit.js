@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, Alert, Image } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
 import moment from 'moment';
@@ -6,6 +6,9 @@ import { useUser } from '@clerk/clerk-expo';
 import Colors from '../../../assets/Shared/Colors';
 import SubHeading from '../HomePage/SubHeading';
 import { addAppointment, editAppointment, getAllAppointments, getAppointmentsByEmail } from '../../Services/GlobalAPI';
+import { Ionicons } from '@expo/vector-icons';
+import PageHeader from '../Shared/PageHeader';
+import HorizontalLine from '../Shared/HorizontalLine';
 
 export default function AppointmentEdit() {
   const navigation = useNavigation()
@@ -64,26 +67,9 @@ const getTime = () => {
 useEffect(() => {
   getDays()
   getTime()
-  // console.log(param?.appointment?.hospital?.id)
-  // console.log(param)
+  console.log(param?.appointment?.hospital?.id)
+  console.log(param)
 }, [])
-
-const checkTextInput = () => {
-  if (!selectedDate) {
-    alert('Please Enter date');
-    return;
-  }
-  if (!selectedTime) {
-    alert('Please Enter time');
-    return;
-  }
-  if (!notes) {
-    alert('Please Enter notes');
-    return;
-  }
-
-};
-
 
 const handleSaveButtonClick = () => {
 
@@ -133,18 +119,38 @@ const handleSaveButtonClick = () => {
     })
 
   }
-
 }
 
 return (
     <View>
-        <Text style={{
-          fontSize: 18,
-          color: Colors.GRAY
-        }}>Edit Appointment</Text>
-        <Text>{param?.appointment?.hospital?.name}</Text>
-        <SubHeading subHeadingTitle={'Day'} seeAll={false}/>
+      <View style={{ position: 'absolute', zIndex: 10, margin: 15 }}>
+        <PageHeader style={{color: Colors.white}} title={'Edit Appointment'} backButton={false}/>
+      </View >
 
+        <Image source={{uri:param?.appointment?.hospital?.imageUrl}} 
+        style={{width: '100%', height: 200, opacity: 0.75, borderTopLeftRadius: 10, borderTopRightRadius: 20}}/>
+
+
+        <View style={{paddingLeft: 10}}>
+          <Text style={{
+            fontSize: 20, fontFamily: 'appfont-semi'
+          }}>{param?.appointment?.hospital?.name}</Text>
+          <View style={{display: 'flex', flexDirection: 'row', gap: 5, alignItems: 'center'}}>
+                <Ionicons name="location" size={22} color={Colors.PRIMARY} />
+                <Text style={{
+                  fontSize: 16, 
+                  fontFamily: 'appfont', 
+                  color: Colors.GRAY, 
+                  marginTop: 10, 
+                  width: '70%'
+                  }}>{param?.appointment?.hospital?.address}</Text>
+          </View>
+        </View>
+        <HorizontalLine />
+
+        <View style={{paddingLeft: 10, marginTop: -10}}>
+          <SubHeading subHeadingTitle={'Date'} seeAll={false}/>
+        </View>
         <FlatList 
           data={next7Days}
           horizontal={true}
@@ -159,8 +165,9 @@ return (
               </TouchableOpacity>
           )}
         />
-
-        <SubHeading subHeadingTitle={'Time'} seeAll={false}/>
+        <View style={{paddingLeft: 10}}>
+          <SubHeading subHeadingTitle={'Time'} seeAll={false}/>
+        </View>
 
         <FlatList 
               data={timeList}
@@ -175,7 +182,9 @@ return (
               )}
           />
 
-        <SubHeading subHeadingTitle={'Note'} seeAll={false} />
+        <View style={{paddingLeft: 10}}>
+          <SubHeading subHeadingTitle={'Note'} seeAll={false} />
+        </View>
 
         <TextInput 
           numberOfLines={3}
