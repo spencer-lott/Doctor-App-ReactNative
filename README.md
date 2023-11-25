@@ -16,9 +16,9 @@ After cloning this repository to your own machine,
 2. At the start screen, select `Open a project or solution`.
 3. Navigate to your workspace directory, open the `Doctor-App-ReactNative` folder, and select the **.sln** file to run the solution.
 4. Configure the localhost to your local IP Address. You find this by typing in the search bar at the bottom of your screen 'cmd'. Then, in the command prompt type 'ipconfig' and hit enter. Scroll down if you have to, and the number you will be looking for is under 'IPv4 Address'. Copy that number and insert it here in the launchSettings.json file: 
-![IP Address Configuration](https://github.com/spencer-lott/Doctor-App-ReactNative/blob/main/Doctor-App-ReactNative/client/doctor-app/assets/ipAddressConfiguration.png)
-4. Hit the Green play button on the toolbar that says "Doctor_App_ReactNative".
-5. This will run the API along with an API tool [Swagger](https://swagger.io/docs/specification/2-0/what-is-swagger/) for testing at the address `https://<your-ip-address>:5236/swagger/index` and open it in your default browser.
+![IP Address Configuration](https://github.com/spencer-lott/Doctor-App-ReactNative/blob/main/Doctor-App-ReactNative/client/doctor-app/assets/ipAddressConfiguration.png). Additionally, you will need to open your VS Code editor and update the BASE_URL found in App/Services/GlobalAPI.js as well as the geHospitals ascync function found in App/Components/HomePage/Hospitals.js.
+5. Hit the Green play button on the toolbar that says "Doctor_App_ReactNative".
+6. This will run the API along with an API tool [Swagger](https://swagger.io/docs/specification/2-0/what-is-swagger/) for testing at the address `https://<your-ip-address>:5236/swagger/index` and open it in your default browser.
 
 **Run the Client:**
 1. In your command line, cd into the [Client Folder](https://github.com/spencer-lott/Doctor-App-ReactNative/tree/main/Doctor-App-ReactNative/client/doctor-app), and into the folder named `doctor-app`.
