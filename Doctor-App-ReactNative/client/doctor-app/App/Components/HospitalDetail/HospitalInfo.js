@@ -6,6 +6,7 @@ import ActionButton from './ActionButton';
 import SubHeading from '../HomePage/SubHeading';
 import HorizontalLine from '../Shared/HorizontalLine';
 
+// This is the information that is stacked on top of the image of the hospital details screen
 export default function HospitalInfo({ hDetail }) {
   return (
     <View >

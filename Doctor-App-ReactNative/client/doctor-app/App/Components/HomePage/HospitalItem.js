@@ -2,6 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import Colors from '../../../assets/Shared/Colors'
 
+// Contents of each hospital for the FlatList in Hospitals.js for the home screen
 export default function HospitalItem({ hospital }) {
   return (
     <View style={{

@@ -1,9 +1,10 @@
-import { View, Text, Button, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
 import React from 'react'
 import { useAuth, useUser } from '@clerk/clerk-expo'
 import Colors from '../../assets/Shared/Colors'
 import PageHeader from '../Components/Shared/PageHeader'
 
+// Contents of the profile tab. It's where the user has access to sign out of the app
 export default function Profile() {
   const {isLoaded, signOut} = useAuth()
   const {user} = useUser()

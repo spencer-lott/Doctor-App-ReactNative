@@ -1,10 +1,12 @@
 import React from "react";
 import * as WebBrowser from "expo-web-browser";
-import { Button, Dimensions, Text, TouchableOpacity } from "react-native";
+import { Dimensions, Text, TouchableOpacity } from "react-native";
 import { useOAuth } from "@clerk/clerk-expo";
 import { useWarmUpBrowser } from "../../hooks/warmUpBrowser";
 import Colors from "../../assets/Shared/Colors";
- 
+
+// Sign in method given to me in the tutorial
+
 WebBrowser.maybeCompleteAuthSession();
  
 const SignInWithOAuth = () => {

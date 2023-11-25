@@ -1,19 +1,19 @@
 import { View, Text, StyleSheet, FlatList, TextInput, TouchableOpacity, Alert, Image } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native';
-import moment from 'moment';
 import { useUser } from '@clerk/clerk-expo';
+import { Ionicons } from '@expo/vector-icons';
+import { editAppointment } from '../../Services/GlobalAPI';
+import moment from 'moment';
 import Colors from '../../../assets/Shared/Colors';
 import SubHeading from '../HomePage/SubHeading';
-import { addAppointment, editAppointment, getAllAppointments, getAppointmentsByEmail } from '../../Services/GlobalAPI';
-import { Ionicons } from '@expo/vector-icons';
 import PageHeader from '../Shared/PageHeader';
 import HorizontalLine from '../Shared/HorizontalLine';
 
 export default function AppointmentEdit() {
   const navigation = useNavigation()
   const param = useRoute().params;
-  const {isLoaded, isSignedIn, user} = useUser()
+  const {user} = useUser()
   const [next7Days, setNext7Days] = useState([])
   const [timeList, setTimeList] = useState([])
   
@@ -21,6 +21,7 @@ export default function AppointmentEdit() {
   const [selectedTime, setSelectedTime] = useState()
   const [notes, setNotes] = useState()
 
+  // Uses the moment dependency to get us the next seven days. The loop can be adjusted to give you more or less days
   const getDays = () => {
     const today = moment()
     const nextSevenDays = []
@@ -35,9 +36,9 @@ export default function AppointmentEdit() {
     }
 
     setNext7Days(nextSevenDays)
-    // console.log(nextSevenDays)
 }
 
+// AM and PM times
 const getTime = () => {
     const timeList = []
     for(let i = 8; i <= 12; i++)
@@ -59,7 +60,6 @@ const getTime = () => {
         })
     }
 
-    // console.log(timeList)
     setTimeList(timeList)
 
 }
@@ -67,13 +67,11 @@ const getTime = () => {
 useEffect(() => {
   getDays()
   getTime()
-  console.log(param?.appointment?.hospital?.id)
-  console.log(param)
 }, [])
 
+// handler to send the the edited appointment to the API
 const handleSaveButtonClick = () => {
 
-  console.log('***EDIT PRESSED***')
   const appointmentToSendToAPI = {
       Id: parseInt(param?.appointment?.id),
       Email: user.primaryEmailAddress.emailAddress,
@@ -84,9 +82,8 @@ const handleSaveButtonClick = () => {
       UserName: user.fullName
 
   }
-  console.log(appointmentToSendToAPI)
 
-  if(!selectedDate || !selectedTime || !notes){
+  if(!selectedDate || !selectedTime || !notes){ // if one of the selections is left black it will alert the user, preventing any errors or faulty data
     Alert.alert(
       'ERROR',
       'Please fill all fields before submitting',
@@ -99,7 +96,7 @@ const handleSaveButtonClick = () => {
       )
     } else {
 
-    return editAppointment(appointmentToSendToAPI)
+    return editAppointment(appointmentToSendToAPI) // execution of the fetch PUT API call
     
     .then(() => {
         Alert.alert(
@@ -113,9 +110,9 @@ const handleSaveButtonClick = () => {
             { cancelable: false }
         )
         navigation.navigate('Appointment')
-        setNotes()
-        setSelectedDate()
-        setSelectedTime()  
+        setNotes() // Resetting state
+        setSelectedDate() // Resetting state
+        setSelectedTime() // Resetting state
     })
 
   }
@@ -194,6 +191,7 @@ return (
         />
 
         <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly'}}>
+
           {/* Cancel */}
           <TouchableOpacity onPress={() => navigation.goBack()}
             style={{

@@ -6,6 +6,7 @@ import DoctorListBig from '../Components/HospitalDoctorsScreen/DoctorListBig'
 import { getAllDoctors, getAllHospitals } from '../Services/GlobalAPI'
 import Colors from '../../assets/Shared/Colors'
 
+// Contents of the Explore tab showing all hospital or all doctors
 export default function Explores() {
     const [activeTab, setActiveTab] = useState('Hospital')
     const [hospitalList, setHospitalList] = useState([])

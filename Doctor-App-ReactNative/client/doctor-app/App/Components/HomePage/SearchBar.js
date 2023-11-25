@@ -1,8 +1,9 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, TextInput } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../../assets/Shared/Colors';
 
+// Not actually implemented, but could be at a future time
 export default function SearchBar({setSearchText}) {
   const [searchInput, setSearchInput] = useState()
   return (
