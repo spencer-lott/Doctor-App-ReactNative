@@ -1,18 +1,19 @@
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native'
-import React, {useState} from 'react'
-import moment from 'moment';
-import { deleteAppointment, getAppointmentsByEmail } from '../../Services/GlobalAPI';
-import Colors from '../../../assets/Shared/Colors'
-import HorizontalLine from '../Shared/HorizontalLine'
+import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 import { useUser } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { deleteAppointment, getAppointmentsByEmail } from '../../Services/GlobalAPI';
+import moment from 'moment';
+import HorizontalLine from '../Shared/HorizontalLine'
+import Colors from '../../../assets/Shared/Colors'
 
 
 export default function AppointmentCardItem({ appointment, setUserAppointments }) {
-    const {isLoaded, isSignedIn, user} = useUser()
-    const navigation = useNavigation();
+    const {user} = useUser()
+    const navigation = useNavigation()
 
+    // Handler that deletes a specific appointment
     const handleDelete = () => {
             Alert.alert('Delete', 'Are you sure you want to delete this item?', [
       {
@@ -27,23 +28,22 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
         onPress: () => {
         deleteAppointment(appointment.id)
             .then(() => {
-                // Retrieve updated appointments after deletion
                 getAppointmentsByEmail(user.primaryEmailAddress.emailAddress)
                     .then(data => setUserAppointments(data))
                     .catch(error => {
-                        // Handle error if needed
-                        console.error("Error fetching appointments:", error);
+                        console.error("Error fetching appointments:", error)
                     });
             })
             .catch(error => {
-                console.error("Error deleting appointment:", error);
-            });
+                console.error("Error deleting appointment:", error)
+            })
         }
       }
     ])  
-    };
+    }
     
-    const MAX_CHARACTERS_PER_LINE = 30; // Define the maximum characters per line
+    // I was having an issue where the notes would get cut off on the right side of the screen. I found this on Stack Overflow to prevent this problem.
+    const MAX_CHARACTERS_PER_LINE = 30 // Define the maximum characters per line
 
     // Splitting the note into chunks of maximum characters per line
     const splitNote = (note) => {
@@ -64,16 +64,17 @@ export default function AppointmentCardItem({ appointment, setUserAppointments }
         }
     
         return chunks;
-    };
+    }
     // Usage in your component
-    const noteChunks = splitNote(appointment.note);
+    const noteChunks = splitNote(appointment.note)
     const addressNoteChunks = splitNote(appointment?.hospital?.address)
 
+    // This handler navigates the user to an edit appointment screen that is a form.
     const handleEdit = () => {
         navigation.navigate('edit-appointment', {
           appointment: appointment
         });
-      };
+      }
     
 
   return (

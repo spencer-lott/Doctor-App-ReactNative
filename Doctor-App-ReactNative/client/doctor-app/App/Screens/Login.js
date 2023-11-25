@@ -1,9 +1,9 @@
-import { View, Text, StyleSheet, Dimensions, TouchableOpacity, Image, LogBox } from 'react-native'
+import { View, Text, StyleSheet, Image, LogBox } from 'react-native'
 import React from 'react'
 import Colors from '../../assets/Shared/Colors'
 import SignInWithOAuth from '../Components/SignInWithOAuth'
 
-LogBox.ignoreAllLogs()
+LogBox.ignoreAllLogs() // I use this for demo purposes to hide any warnings/errors in the console so that the banners aren't showing
 
 export default function Login() {
   return (
@@ -18,7 +18,7 @@ export default function Login() {
       <Image source={{uri:'https://images.saymedia-content.com/.image/c_limit%2Ccs_srgb%2Cq_auto:eco%2Cw_552/MTc2Mjk4NjA2Mzg1NTA1NDUz/4-mystical-depictions-of-snakes-in-hinduism.webp'}}
       style={{width: 400,
       height: 500}}/>
-      <Text style={{textAlign: 'center', marginTop: 20}}>Book an Appointment Effortlessly and manage your health journey</Text>
+      <Text style={{textAlign: 'center', marginTop: 20}}>Book an appointment effortlessly and manage your health journey</Text>
       <SignInWithOAuth />
 
       </View>

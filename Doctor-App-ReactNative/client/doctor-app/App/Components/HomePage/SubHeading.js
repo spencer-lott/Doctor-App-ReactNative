@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import Colors from '../../../assets/Shared/Colors'
 
+// Used throughout the project to make different titles and help separate ui elements for readability
 export default function SubHeading({subHeadingTitle, seeAll = true}) {
   return (
     <View style={{marginTop: 10}}> 

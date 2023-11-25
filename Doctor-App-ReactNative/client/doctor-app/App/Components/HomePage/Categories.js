@@ -1,10 +1,11 @@
-import { View, Text, Image, FlatList, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native'
 import React, {useState, useEffect} from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { getAllCategories } from '../../Services/GlobalAPI'
 import Colors from '../../../assets/Shared/Colors'
 import SubHeading from './SubHeading'
-import { useNavigation } from '@react-navigation/native'
 
+// Responsible for showing the categories on the home screen
 export default function Categories() {
     const navigation = useNavigation()
     const [categories, setCategories] = useState([])

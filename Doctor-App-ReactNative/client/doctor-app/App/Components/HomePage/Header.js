@@ -3,6 +3,7 @@ import React from 'react'
 import { useUser } from '@clerk/clerk-expo'
 import { Ionicons } from '@expo/vector-icons';
 
+// This header contains a photo of the user, a welcome message, and a notification bell
 export default function Header() {
     const {isLoaded, isSignedIn, user} = useUser()
     if(!isLoaded || !isSignedIn) {

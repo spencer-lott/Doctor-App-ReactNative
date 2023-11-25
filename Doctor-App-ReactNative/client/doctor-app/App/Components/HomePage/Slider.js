@@ -1,7 +1,8 @@
-import { View, Text, FlatList, Image, Dimensions } from 'react-native'
+import { View, FlatList, Image, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getAllSliders } from '../../Services/GlobalAPI'
 
+// Shows the slider images for the home screen
 export default function Slider() {
     const [sliders, setSliders] = useState([])
 

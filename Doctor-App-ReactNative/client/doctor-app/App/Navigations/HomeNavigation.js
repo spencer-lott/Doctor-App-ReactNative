@@ -7,6 +7,7 @@ import HospitalDetails from './HospitalDetails';
 import BookAppointment from '../Screens/BookAppointment';
 import AppointmentEdit from '../Components/Appointment/AppointmentEdit';
 
+// These screens are all part of the home tab
 const Stack = createStackNavigator();
 export default function HomeNavigation() {
   return (

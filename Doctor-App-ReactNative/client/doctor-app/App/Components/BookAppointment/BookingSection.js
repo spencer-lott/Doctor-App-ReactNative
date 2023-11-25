@@ -1,16 +1,16 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native'
 import React, {useState, useEffect} from 'react'
+import { useNavigation } from '@react-navigation/native';
+import { useUser } from '@clerk/clerk-expo'
+import { addAppointment, getAppointmentsByEmail } from '../../Services/GlobalAPI'
+import moment from 'moment'
 import Colors from '../../../assets/Shared/Colors'
 import SubHeading from '../HomePage/SubHeading'
-import moment from 'moment'
-import { addAppointment, getAllAppointments, getAppointmentsByEmail } from '../../Services/GlobalAPI'
-import { useUser } from '@clerk/clerk-expo'
-import { useNavigation } from '@react-navigation/native';
 
 
 export default function BookingSection({ hospital }) {
     const navigation = useNavigation()
-    const {isLoaded, isSignedIn, user} = useUser()
+    const {user} = useUser()
 
     const [next7Days, setNext7Days] = useState([])
     const [timeList, setTimeList] = useState([])
@@ -24,6 +24,7 @@ export default function BookingSection({ hospital }) {
         getTime()
     }, [])
 
+    // Uses the moment dependency to get us the next seven days. The loop can be adjusted to give you more or less days
     const getDays = () => {
         const today = moment()
         const nextSevenDays = []
@@ -38,9 +39,9 @@ export default function BookingSection({ hospital }) {
         }
 
         setNext7Days(nextSevenDays)
-        // console.log(nextSevenDays)
     }
-
+    
+    // AM and PM times
     const getTime = () => {
         const timeList = []
         for(let i = 8; i <= 12; i++)
@@ -67,6 +68,7 @@ export default function BookingSection({ hospital }) {
 
     }
     
+    // handler to send the new appointment to the API
     const handleSaveButtonClick = () => {
 
         const appointmentToSendToAPI = {
@@ -79,7 +81,7 @@ export default function BookingSection({ hospital }) {
 
         }
 
-        if(!selectedDate || !selectedTime || !notes){
+        if(!selectedDate || !selectedTime || !notes){ // if one of the selections is left black it will alert the user, preventing any errors or faulty data
             Alert.alert(
               'ERROR',
               'Please fill all fields before submitting',
@@ -93,7 +95,7 @@ export default function BookingSection({ hospital }) {
             } else {
         
 
-        return addAppointment(appointmentToSendToAPI)
+        return addAppointment(appointmentToSendToAPI) // executing the POST fetch call
         .then(() => {
             Alert.alert(
                 'Congratulations!',
@@ -109,7 +111,7 @@ export default function BookingSection({ hospital }) {
             
             
         })
-        .then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress))
+        .then(() => getAppointmentsByEmail(user.primaryEmailAddress.emailAddress)) // Retrieve the the appointments again in order to refresh
     }
     }
 
@@ -178,8 +180,6 @@ export default function BookingSection({ hospital }) {
             fontSize: 17
             }}>Make Appointment</Text>
       </TouchableOpacity>
-
-
     </View>
   )
 }

@@ -1,11 +1,11 @@
 import { View, Text, Image } from 'react-native'
-import React, {useEffect} from 'react'
-import PageHeader from '../Shared/PageHeader'
-import Colors from '../../../assets/Shared/Colors'
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../../../assets/Shared/Colors'
+import PageHeader from '../Shared/PageHeader'
 import HorizontalLine from '../Shared/HorizontalLine';
 
-export default function AppointmentHospitalInfo({hospital}) {
+export default function AppointmentHospitalInfo({ hospital }) {
 
   return (
     <View>
@@ -27,7 +27,6 @@ export default function AppointmentHospitalInfo({hospital}) {
                   width: '70%'
                   }}>{hospital.address}</Text>
           </View>
-
         </View>
 
       </View>

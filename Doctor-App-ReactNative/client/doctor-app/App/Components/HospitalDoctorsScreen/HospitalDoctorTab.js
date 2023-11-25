@@ -2,13 +2,14 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Colors from '../../../assets/Shared/Colors'
 
+// Tabs that use state to show the list of hospitals or the list of doctors associated with the category
 export default function HospitalDoctorTab({ activeTab }) {
     const [activeIndex, setActiveIndex] = useState(0);
   return (
     <View style={{marginTop: 10}}>
         <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
             <TouchableOpacity 
-            style={[activeIndex == 0 ? styles.activeTab : styles.inActiveTab]}
+            style={[activeIndex == 0 ? styles.activeTab : styles.inActiveTab]} // activeIndex for hospital === 0
             onPress={() => {setActiveIndex(0); activeTab('Hospital')}}
             >
                 <Text style={[
@@ -16,7 +17,7 @@ export default function HospitalDoctorTab({ activeTab }) {
                 ]}>Hospital</Text>
             </TouchableOpacity>
             <TouchableOpacity 
-            style={[activeIndex == 1 ? styles.activeTab : styles.inActiveTab]}
+            style={[activeIndex == 1 ? styles.activeTab : styles.inActiveTab]} // activeIndex for doctor === 1
             onPress={() => {setActiveIndex(1); activeTab('Doctor')}}>
                 <Text style={[
                     activeIndex == 1 ? styles.activeText : styles.inActiveText

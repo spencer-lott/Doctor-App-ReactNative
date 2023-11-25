@@ -1,4 +1,4 @@
-import { View, Text, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import AppointmentHospitalInfo from '../Components/BookAppointment/AppointmentHospitalInfo'
