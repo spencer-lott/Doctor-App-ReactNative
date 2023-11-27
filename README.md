@@ -1,6 +1,6 @@
 # Huntington Tri-State Hospitals
 
-Huntington Tri-State Hospitals is an app designed for people who live in the Huntington, WV Tri-State area. It's made so that residents of the area can make an doctors appointment easily on their handheld device. I made this app in my free time to learn the basics of React Native.
+Huntington Tri-State Hospitals is an app designed for people who live in the Huntington, WV Tri-State area. It's made so that residents of the area can make an doctors appointment easily on their handheld device. The purpose of the app was to learn more about React Native and perfom CRUD. It turned out to be a success and I learned a lot!
 
 ## Testing Instructions
 After cloning this repository to your own machine,
